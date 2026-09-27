@@ -157,10 +157,7 @@
             if (!selectedAnswer) return;
 
             const text = `Мой ответ на вопрос "Нравится?": ${selectedAnswer}`;
-            const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(text)}`;
-
-            window.open(shareUrl, '_blank');
-        });
-    </script>
-</body>
-</html>
+            if (tg && tg.sendData) {
+    tg.sendData(JSON.stringify(payload));
+    ...
+            }
