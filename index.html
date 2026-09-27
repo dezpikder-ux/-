@@ -1,163 +1,209 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>привет творожок</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Rubik', -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; }
 
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+  body {
+    background: linear-gradient(135deg, #2b2b2b 0%, #6e6e6e 100%);
+    min-height: 100vh;
+    display: flex; justify-content: center; align-items: center;
+    padding: 20px;
+  }
 
-        .card {
-            background: #fff;
-            border-radius: 20px;
-            padding: 40px 30px;
-            max-width: 420px;
-            width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
+  .card {
+    background: linear-gradient(160deg, #3a3a3a 0%, #565656 100%);
+    border-radius: 24px;
+    padding: 35px 25px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
 
-        h1 {
-            color: #333;
-            font-size: 28px;
-            margin-bottom: 30px;
-        }
+  .dog-photo {
+    width: 100%;
+    max-width: 260px;
+    border-radius: 16px;
+    margin-bottom: 22px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(255, 255, 255, 0.1);
+  }
 
-        .question {
-            font-size: 22px;
-            color: #555;
-            margin-bottom: 25px;
-        }
+  .greeting {
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: lowercase;
+    margin-bottom: 18px;
+    opacity: 0.9;
+  }
 
-        .buttons {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
+  .question {
+    font-family: 'Rubik', sans-serif;
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #f0f0f0;
+    margin-bottom: 28px;
+    text-shadow:
+      0 0 8px rgba(255, 255, 255, 0.6),
+      0 0 20px rgba(255, 255, 255, 0.4),
+      0 0 40px rgba(200, 200, 200, 0.3),
+      0 2px 4px rgba(0, 0, 0, 0.5);
+  }
 
-        .btn-choice {
-            flex: 1;
-            padding: 15px;
-            font-size: 18px;
-            border: 2px solid #667eea;
-            background: #fff;
-            color: #667eea;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-weight: 600;
-        }
+  .buttons { display: flex; gap: 15px; margin-bottom: 22px; }
 
-        .btn-choice:hover {
-            background: #667eea;
-            color: #fff;
-            transform: translateY(-2px);
-        }
+  .btn-choice {
+    flex: 1;
+    padding: 16px;
+    font-size: 18px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.05);
+    color: #f0f0f0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+  }
 
-        .btn-choice.selected {
-            background: #667eea;
-            color: #fff;
-        }
+  .btn-choice:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  }
 
-        .btn-choice[data-value="Нет"].selected {
-            background: #e74c3c;
-            border-color: #e74c3c;
-        }
+  .btn-choice.selected {
+    background: #d0d0d0;
+    color: #222;
+    border-color: #ffffff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+    text-shadow: none;
+  }
 
-        .btn-choice[data-value="Нет"]:hover {
-            background: #e74c3c;
-            border-color: #e74c3c;
-        }
+  .btn-choice[data-value="Нет"].selected {
+    background: #8a8a8a;
+    color: #fff;
+    border-color: #b0b0b0;
+    box-shadow: 0 0 20px rgba(180, 180, 180, 0.5);
+  }
 
-        .btn-share {
-            width: 100%;
-            padding: 15px;
-            font-size: 17px;
-            border: none;
-            border-radius: 12px;
-            background: #0088cc;
-            color: #fff;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
+  .btn-share {
+    width: 100%;
+    padding: 16px;
+    font-size: 17px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #cfcfcf, #8a8a8a);
+    color: #1a1a1a;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4),
+                0 0 15px rgba(255, 255, 255, 0.15);
+    transition: all 0.2s;
+  }
 
-        .btn-share:hover {
-            background: #0077b3;
-            transform: translateY(-2px);
-        }
+  .btn-share:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5),
+                0 0 25px rgba(255, 255, 255, 0.25);
+  }
 
-        .btn-share:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
+  .btn-share:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
 
-        .result {
-            margin-top: 20px;
-            font-size: 16px;
-            color: #667eea;
-            font-weight: 600;
-            min-height: 20px;
-        }
-    </style>
+  .result {
+    margin-top: 18px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #e8e8e8;
+    min-height: 22px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  }
+</style>
 </head>
 <body>
-    <div class="card">
-        <h1>Главная</h1>
-        <p class="question">Нравится?</p>
+  <div class="card">
 
-        <div class="buttons">
-            <button class="btn-choice" data-value="Да">Да</button>
-            <button class="btn-choice" data-value="Нет">Нет</button>
-        </div>
+    <img class="dog-photo"
+         src="https://i.pinimg.com/736x/8e/7f/8a/8e7f8a1b2c3d4e5f6a7b8c9d0e1f2a3b.jpg"
+         alt="">
 
-        <button class="btn-share" id="shareBtn" disabled>
-            📤 Поделиться ответом
-        </button>
+    <p class="greeting">привет творожок</p>
 
-        <p class="result" id="result"></p>
+    <h1 class="question">Нравится</h1>
+
+    <div class="buttons">
+      <button class="btn-choice" data-value="Да">Да</button>
+      <button class="btn-choice" data-value="Нет">Нет</button>
     </div>
 
-    <script>
-        const buttons = document.querySelectorAll('.btn-choice');
-        const shareBtn = document.getElementById('shareBtn');
-        const resultText = document.getElementById('result');
-        let selectedAnswer = null;
+    <button class="btn-share" id="shareBtn" disabled>📤 Отправить ответ</button>
 
-        buttons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                buttons.forEach(b => b.classList.remove('selected'));
-                btn.classList.add('selected');
-                selectedAnswer = btn.dataset.value;
-                shareBtn.disabled = false;
-                resultText.textContent = 'Ваш ответ: ' + selectedAnswer;
-            });
-        });
+    <p class="result" id="result"></p>
+  </div>
 
-        shareBtn.addEventListener('click', () => {
-            if (!selectedAnswer) return;
+<script>
+  const BOT_TOKEN = "8803123152:AAF9MzSE4nmnRXkBuYqdUkRVevi0bgOYm2g";
+  const CHAT_ID = "8470781830";
 
-            const text = `Мой ответ на вопрос "Нравится?": ${selectedAnswer}`;
-            if (tg && tg.sendData) {
-    tg.sendData(JSON.stringify(payload));
-    ...
-            }
+  const buttons = document.querySelectorAll('.btn-choice');
+  const shareBtn = document.getElementById('shareBtn');
+  const resultText = document.getElementById('result');
+  let selectedAnswer = null;
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedAnswer = btn.dataset.value;
+      shareBtn.disabled = false;
+      resultText.textContent = 'Ваш ответ: ' + selectedAnswer;
+    });
+  });
+
+  shareBtn.addEventListener('click', async () => {
+    if (!selectedAnswer) return;
+    shareBtn.disabled = true;
+    shareBtn.textContent = 'Отправка...';
+
+    const text = '📥 Новый ответ: ' + selectedAnswer;
+    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`
+              + `?chat_id=${encodeURIComponent(CHAT_ID)}`
+              + `&text=${encodeURIComponent(text)}`;
+
+    try {
+      const r = await fetch(url);
+      const data = await r.json();
+      if (data.ok) {
+        resultText.textContent = '✅ Ответ отправлен!';
+        shareBtn.textContent = 'Отправлено';
+      } else { throw new Error(data.description || 'error'); }
+    } catch (e) {
+      console.error(e);
+      resultText.textContent = '❌ Ошибка отправки';
+      shareBtn.disabled = false;
+      shareBtn.textContent = '📤 Отправить ответ';
+    }
+  });
+</script>
+</body>
+</html>
