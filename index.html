@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
+        .question {
+            font-size: 22px;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .btn-choice {
+            flex: 1;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #667eea;
+            background: #fff;
+            color: #667eea;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .btn-choice:hover {
+            background: #667eea;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .btn-choice.selected {
+            background: #667eea;
+            color: #fff;
+        }
+
+        .btn-choice[data-value="Нет"].selected {
+            background: #e74c3c;
+            border-color: #e74c3c;
+        }
+
+        .btn-choice[data-value="Нет"]:hover {
+            background: #e74c3c;
+            border-color: #e74c3c;
+        }
+
+        .btn-share {
+            width: 100%;
+            padding: 15px;
+            font-size: 17px;
+            border: none;
+            border-radius: 12px;
+            background: #0088cc;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-share:hover {
+            background: #0077b3;
+            transform: translateY(-2px);
+        }
+
+        .btn-share:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #667eea;
+            font-weight: 600;
+            min-height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Главная</h1>
+        <p class="question">Нравится?</p>
+
+        <div class="buttons">
+            <button class="btn-choice" data-value="Да">Да</button>
+            <button class="btn-choice" data-value="Нет">Нет</button>
+        </div>
+
+        <button class="btn-share" id="shareBtn" disabled>
+            📤 Поделиться ответом
+        </button>
+
+        <p class="result" id="result"></p>
+    </div>
+
+    <script>
+        const buttons = document.querySelectorAll('.btn-choice');
+        const shareBtn = document.getElementById('shareBtn');
+        const resultText = document.getElementById('result');
+        let selectedAnswer = null;
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedAnswer = btn.dataset.value;
+                shareBtn.disabled = false;
+                resultText.textContent = 'Ваш ответ: ' + selectedAnswer;
+            });
+        });
+
+        shareBtn.addEventListener('click', () => {
+            if (!selectedAnswer) return;
+
+            const text = `Мой ответ на вопрос "Нравится?": ${selectedAnswer}`;
+            const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(text)}`;
+
+            window.open(shareUrl, '_blank');
+        });
+    </script>
+</body>
+</html>
